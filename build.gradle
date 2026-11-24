@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'org.springframework.boot' version '3.5.14'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.tulka.samvaer'
+version = '1.0.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.modulith:spring-modulith-bom:1.4.14'
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // TEMPLATE-PERSISTENCE-START
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.liquibase:liquibase-core'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.postgresql:postgresql'
+    // TEMPLATE-PERSISTENCE-END
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.17'
+    implementation 'org.springframework.modulith:spring-modulith-starter-core'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.spockframework:spock-core:2.4-groovy-4.0'
+    testImplementation 'org.spockframework:spock-spring:2.4-groovy-4.0'
+    testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
+    testImplementation 'org.apache.groovy:groovy-json'
+    testImplementation 'com.networknt:json-schema-validator:1.5.9'
+    testImplementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

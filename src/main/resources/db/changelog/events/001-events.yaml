@@ -1,0 +1,146 @@
+# Member and group ids are references into identity and groups, without foreign keys:
+# modules never join each other's tables (ADR-001).
+databaseChangeLog:
+  - changeSet:
+      id: events-001-events
+      author: tulka
+      changes:
+        - createTable:
+            tableName: events_series
+            columns:
+              - column: { name: id, type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: frequency, type: VARCHAR(10), constraints: { nullable: false } }
+              - column: { name: interval_count, type: INT, constraints: { nullable: false } }
+              - column: { name: until_date, type: DATE }
+              - column: { name: created_at, type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+        - createTable:
+            tableName: events_event
+            columns:
+              - column: { name: id, type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column:
+                  name: series_id
+                  type: UUID
+                  constraints: { foreignKeyName: fk_events_event_series, references: events_series(id) }
+              - column: { name: kind, type: VARCHAR(20), constraints: { nullable: false } }
+              - column: { name: title, type: VARCHAR(120), constraints: { nullable: false } }
+              - column: { name: description, type: VARCHAR(4000) }
+              - column: { name: starts_at, type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: ends_at, type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: all_day, type: BOOLEAN, constraints: { nullable: false } }
+              - column: { name: location, type: VARCHAR(120) }
+              - column: { name: host_id, type: UUID, constraints: { nullable: false } }
+              - column: { name: visibility_scope, type: VARCHAR(20), constraints: { nullable: false } }
+              - column: { name: created_at, type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: updated_at, type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: cancelled_at, type: TIMESTAMP WITH TIME ZONE }
+              - column: { name: version, type: BIGINT, constraints: { nullable: false } }
+        - createIndex:
+            tableName: events_event
+            indexName: ix_events_event_starts_at
+            columns:
+              - column: { name: starts_at }
+        - createIndex:
+            tableName: events_event
+            indexName: ix_events_event_series
+            columns:
+              - column: { name: series_id }
+        - createTable:
+            tableName: events_event_group
+            columns:
+              - column:
+                  name: event_id
+                  type: UUID
+                  constraints: { nullable: false, foreignKeyName: fk_events_event_group_event, references: events_event(id) }
+              - column: { name: position, type: INT, constraints: { nullable: false } }
+              - column: { name: group_id, type: UUID, constraints: { nullable: false } }
+        - addPrimaryKey:
+            tableName: events_event_group
+            columnNames: event_id, position
+        - createIndex:
+            tableName: events_event_group
+            indexName: ix_events_event_group_group
+            columns:
+              - column: { name: group_id }
+        - createTable:
+            tableName: events_answer
+            columns:
+              - column: { name: id, type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column:
+                  name: event_id
+                  type: UUID
+                  constraints: { nullable: false, foreignKeyName: fk_events_answer_event, references: events_event(id) }
+              - column: { name: member_id, type: UUID, constraints: { nullable: false } }
+              - column: { name: status, type: VARCHAR(10), constraints: { nullable: false } }
+              - column: { name: note, type: VARCHAR(200) }
+              - column: { name: invited, type: BOOLEAN, constraints: { nullable: false } }
+              - column: { name: updated_at, type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+        - addUniqueConstraint:
+            tableName: events_answer
+            columnNames: event_id, member_id
+            constraintName: uq_events_answer_event_member
+        - createIndex:
+            tableName: events_answer
+            indexName: ix_events_answer_member
+            columns:
+              - column: { name: member_id }
+        - createTable:
+            tableName: events_bring_item
+            columns:
+              - column: { name: id, type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column:
+                  name: event_id
+                  type: UUID
+                  constraints: { nullable: false, foreignKeyName: fk_events_bring_item_event, references: events_event(id) }
+              - column: { name: title, type: VARCHAR(80), constraints: { nullable: false } }
+              - column: { name: details, type: VARCHAR(200) }
+              - column: { name: slots, type: INT }
+              - column: { name: created_by, type: UUID, constraints: { nullable: false } }
+              - column: { name: position, type: INT, constraints: { nullable: false } }
+              - column: { name: created_at, type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+        - createTable:
+            tableName: events_claim
+            columns:
+              - column: { name: id, type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column:
+                  name: item_id
+                  type: UUID
+                  constraints: { nullable: false, foreignKeyName: fk_events_claim_item, references: events_bring_item(id) }
+              - column: { name: member_id, type: UUID, constraints: { nullable: false } }
+              - column: { name: note, type: VARCHAR(80) }
+              - column: { name: claimed_at, type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+        - addUniqueConstraint:
+            tableName: events_claim
+            columnNames: item_id, member_id
+            constraintName: uq_events_claim_item_member
+        - createTable:
+            tableName: events_programme_item
+            columns:
+              - column:
+                  name: event_id
+                  type: UUID
+                  constraints: { nullable: false, foreignKeyName: fk_events_programme_item_event, references: events_event(id) }
+              - column: { name: starts_at, type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: title, type: VARCHAR(120), constraints: { nullable: false } }
+        - createTable:
+            tableName: events_sleeping_spot
+            columns:
+              - column: { name: id, type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column:
+                  name: event_id
+                  type: UUID
+                  constraints: { nullable: false, foreignKeyName: fk_events_sleeping_spot_event, references: events_event(id) }
+              - column: { name: position, type: INT }
+              - column: { name: place, type: VARCHAR(60), constraints: { nullable: false } }
+              - column: { name: note, type: VARCHAR(80) }
+        - createTable:
+            tableName: events_sleeping_guest
+            columns:
+              - column:
+                  name: spot_id
+                  type: UUID
+                  constraints: { nullable: false, foreignKeyName: fk_events_sleeping_guest_spot, references: events_sleeping_spot(id) }
+              - column: { name: position, type: INT, constraints: { nullable: false } }
+              - column: { name: member_id, type: UUID, constraints: { nullable: false } }
+        - addPrimaryKey:
+            tableName: events_sleeping_guest
+            columnNames: spot_id, position

@@ -1,0 +1,28 @@
+# Member ids are references into identity, without a foreign key: modules never join each other's tables.
+databaseChangeLog:
+  - changeSet:
+      id: groups-001-groups
+      author: tulka
+      changes:
+        - createTable:
+            tableName: groups_group
+            columns:
+              - column: { name: id, type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: name, type: VARCHAR(80), constraints: { nullable: false } }
+              - column: { name: owner_id, type: UUID, constraints: { nullable: false } }
+        - createTable:
+            tableName: groups_membership
+            columns:
+              - column:
+                  name: group_id
+                  type: UUID
+                  constraints: { nullable: false, foreignKeyName: fk_groups_membership_group, references: groups_group(id) }
+              - column: { name: member_id, type: UUID, constraints: { nullable: false } }
+        - addPrimaryKey:
+            tableName: groups_membership
+            columnNames: group_id, member_id
+        - createIndex:
+            tableName: groups_membership
+            indexName: ix_groups_membership_member
+            columns:
+              - column: { name: member_id }

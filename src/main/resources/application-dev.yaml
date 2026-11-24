@@ -1,0 +1,14 @@
+# Local development: `./gradlew bootRun --args='--spring.profiles.active=dev'`
+# In-memory H2 with sample members and groups, signed in as Åsa unless X-Stub-Member-Id says otherwise.
+spring:
+  liquibase:
+    contexts: dev
+
+samvaer:
+  auth:
+    mode: stub
+    stub:
+      default-member-id: 00000000-0000-4000-8000-000000000001
+  cors:
+    allowed-origins: http://localhost:4200
+

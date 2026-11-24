@@ -1,0 +1,11 @@
+# One folder per module (ADR-001). Each module owns its tables, prefixed with its key.
+databaseChangeLog:
+  - include:
+      file: db/changelog/identity/001-members.yaml
+  - include:
+      file: db/changelog/groups/001-groups.yaml
+  - include:
+      file: db/changelog/events/001-events.yaml
+  # Sample members and groups for local development only (context "dev").
+  - include:
+      file: db/changelog/dev/001-sample-members-and-groups.yaml
