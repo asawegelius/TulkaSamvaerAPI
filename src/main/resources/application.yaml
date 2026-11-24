@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: ${SERVICE_NAME:tulka-samvaer-api}
+
+  # TEMPLATE-PERSISTENCE-START
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:tulka-samvaer-api;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE}
+    driver-class-name: ${DB_DRIVER:org.h2.Driver}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/master.yaml
+  # TEMPLATE-PERSISTENCE-END
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics
+  endpoint:
+    health:
+      show-details: when_authorized
+
+app:
+  logging:
+    correlation-id-header: ${CORRELATION_ID_HEADER:X-Correlation-Id}
+
+logging:
+  level:
+    root: INFO
+  structured:
+    format:
+      console: ecs
+    ecs:
+      service:
+        version: ${SERVICE_VERSION:${spring.application.version:1.0.0-SNAPSHOT}}
+        environment: ${SERVICE_ENVIRONMENT:local}
