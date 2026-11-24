@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: identity-001-members
+      author: tulka
+      changes:
+        - createTable:
+            tableName: identity_member
+            columns:
+              - column: { name: id, type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: display_name, type: VARCHAR(80), constraints: { nullable: false } }
+              - column: { name: initials, type: VARCHAR(2), constraints: { nullable: false } }
+              - column: { name: avatar_media_id, type: UUID }
+        - createTable:
+            tableName: identity_member_role
+            columns:
+              - column:
+                  name: member_id
+                  type: UUID
+                  constraints: { nullable: false, foreignKeyName: fk_identity_member_role_member, references: identity_member(id) }
+              - column: { name: role, type: VARCHAR(20), constraints: { nullable: false } }
+        - addPrimaryKey:
+            tableName: identity_member_role
+            columnNames: member_id, role

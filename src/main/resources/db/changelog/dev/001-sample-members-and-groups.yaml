@@ -1,0 +1,304 @@
+# Sample members and groups for local development, with the same ids as the frontend mock
+# (TulkaSamvaerWeb mock-api/seed.mjs), so MOCK_USER ids work against this backend too.
+databaseChangeLog:
+  - changeSet:
+      id: dev-001-sample-members-and-groups
+      author: tulka
+      context: dev
+      changes:
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000001' }
+              - column: { name: display_name, value: 'Åsa' }
+              - column: { name: initials, value: 'Å' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000001' }
+              - column: { name: role, value: 'ADMIN' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000001' }
+              - column: { name: role, value: 'INNER_CIRCLE' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000001' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000002' }
+              - column: { name: display_name, value: 'Jonas' }
+              - column: { name: initials, value: 'J' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000002' }
+              - column: { name: role, value: 'INNER_CIRCLE' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000002' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000003' }
+              - column: { name: display_name, value: 'Sofie' }
+              - column: { name: initials, value: 'S' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000003' }
+              - column: { name: role, value: 'INNER_CIRCLE' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000003' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000004' }
+              - column: { name: display_name, value: 'Kasper' }
+              - column: { name: initials, value: 'K' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000004' }
+              - column: { name: role, value: 'INNER_CIRCLE' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000004' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000005' }
+              - column: { name: display_name, value: 'Maja' }
+              - column: { name: initials, value: 'M' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000005' }
+              - column: { name: role, value: 'INNER_CIRCLE' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000005' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000006' }
+              - column: { name: display_name, value: 'Peter' }
+              - column: { name: initials, value: 'P' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000006' }
+              - column: { name: role, value: 'INNER_CIRCLE' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000006' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000007' }
+              - column: { name: display_name, value: 'Henrik' }
+              - column: { name: initials, value: 'H' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000007' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000008' }
+              - column: { name: display_name, value: 'Line' }
+              - column: { name: initials, value: 'L' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000008' }
+              - column: { name: role, value: 'INNER_CIRCLE' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000008' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000009' }
+              - column: { name: display_name, value: 'Mormor' }
+              - column: { name: initials, value: 'M' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000009' }
+              - column: { name: role, value: 'INNER_CIRCLE' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000009' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000010' }
+              - column: { name: display_name, value: 'Morfar' }
+              - column: { name: initials, value: 'M' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000010' }
+              - column: { name: role, value: 'INNER_CIRCLE' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000010' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000011' }
+              - column: { name: display_name, value: 'Jens' }
+              - column: { name: initials, value: 'J' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000011' }
+              - column: { name: role, value: 'INNER_CIRCLE' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000011' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000012' }
+              - column: { name: display_name, value: 'Emil' }
+              - column: { name: initials, value: 'E' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000012' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: identity_member
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000013' }
+              - column: { name: display_name, value: 'Nora' }
+              - column: { name: initials, value: 'N' }
+        - insert:
+            tableName: identity_member_role
+            columns:
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000013' }
+              - column: { name: role, value: 'MEMBER' }
+        - insert:
+            tableName: groups_group
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000101' }
+              - column: { name: name, value: 'Family' }
+              - column: { name: owner_id, value: '00000000-0000-4000-8000-000000000001' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000101' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000001' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000101' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000008' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000101' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000009' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000101' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000010' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000101' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000011' }
+        - insert:
+            tableName: groups_group
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000102' }
+              - column: { name: name, value: 'Best friends' }
+              - column: { name: owner_id, value: '00000000-0000-4000-8000-000000000001' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000102' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000001' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000102' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000002' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000102' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000003' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000102' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000004' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000102' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000005' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000102' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000006' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000102' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000007' }
+        - insert:
+            tableName: groups_group
+            columns:
+              - column: { name: id, value: '00000000-0000-4000-8000-000000000103' }
+              - column: { name: name, value: 'Cousins' }
+              - column: { name: owner_id, value: '00000000-0000-4000-8000-000000000008' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000103' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000001' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000103' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000008' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000103' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000012' }
+        - insert:
+            tableName: groups_membership
+            columns:
+              - column: { name: group_id, value: '00000000-0000-4000-8000-000000000103' }
+              - column: { name: member_id, value: '00000000-0000-4000-8000-000000000013' }

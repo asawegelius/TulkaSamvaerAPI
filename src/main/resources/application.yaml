@@ -13,11 +13,32 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: false
+    # Each API call runs in its own transaction (see the controllers); no lazy loading in views.
+    open-in-view: false
+    properties:
+      hibernate:
+        default_batch_fetch_size: 50
+        jdbc:
+          time_zone: UTC
 
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/master.yaml
+    # Changesets marked "dev" (sample members and groups) run only when the dev profile is on.
+    contexts: ${LIQUIBASE_CONTEXTS:production}
   # TEMPLATE-PERSISTENCE-END
+
+  modulith:
+    # Modules are the packages marked @ApplicationModule: sections/<key>, platform/<name>, shared (ADR-001).
+    detection-strategy: explicitly-annotated
+
+samvaer:
+  # Calendar rules (today, repeating at the same local time) use this zone. Instants are UTC.
+  time-zone: ${SAMVAER_TIME_ZONE:Europe/Copenhagen}
+  auth:
+    # Login is not decided yet (ADR-005). "none": every API call answers 401.
+    # "stub": the X-Stub-Member-Id header picks the member. Local development and tests only.
+    mode: ${SAMVAER_AUTH_MODE:none}
 
 management:
   endpoints:
